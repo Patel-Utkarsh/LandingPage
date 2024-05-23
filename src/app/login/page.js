@@ -9,6 +9,7 @@ import auth, { setToken, setUser } from "@/redux/features/auth";
 import { useMemo } from "react";
 import Loader from "@/components/Ldr";
 import { setLoader } from "@/redux/features/loader";
+import Cookies from "js-cookie"
 
 
 export default function Login() {
@@ -61,9 +62,9 @@ export default function Login() {
             
             dispatch(setToken(data.token));
             dispatch(setUser(data));
-            localStorage.setItem("token111",JSON.stringify(data.token));
+            Cookies.set('token', data.token, { expires: 30 });
            
-            //console.log(token);
+            console.log('hiii');
             router.push('/');
             return;
 

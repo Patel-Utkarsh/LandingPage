@@ -1,19 +1,16 @@
 "use client"
 import { createSlice} from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
+import { parseCookies } from 'nookies';
 
-const getTokenFromLocalStorage = () => {
-    if (typeof window !== "undefined") {
-      // Check if we're in the browser
-      const token = localStorage.getItem("token111");
-      return token ? JSON.parse(token) : null;
-    }
-    return null;
-};
+const cookies  = parseCookies();
+
+
 
 
 const initialState = {
     user : null,
-    token : getTokenFromLocalStorage()
+    token : cookies.token ? cookies.token : null
     
 
 

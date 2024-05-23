@@ -1,5 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
+import Store from "../redux/store"
+import Prvdr from "@/redux/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,8 +14,23 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+     <Prvdr store= {Store}>
+
+       
+        <Toaster  />
+        {children}
+        </Prvdr>
+
+        
+        </body>
+
+
+       
+      
     </html>
+    
   );
 }

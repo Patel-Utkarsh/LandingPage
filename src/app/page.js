@@ -1,137 +1,4 @@
-"use client"
-import NavBar from "@/components/NavBar";
-import heroImg from "../images/banner.2d2823a2.jpeg";
-import img1 from "../images/a737def3ae519c311e9d38438005d23a.jpg";
-import img2 from "../images/JustWravel-1706862890-bhrigu-3.jpeg"
-import img3 from "../images/Assam_0.jpg"
-import img4 from "../images/JustWravel-1707036478-Kashmir-BP-5.jpeg"
-import img5 from "../images/JustWravel-1707153686-L2L-Turtuk-5.jpeg"
-import img6 from "../images/JustWravel-1707153752-L2L-Turtuk-&-TSO-Moriri-4.jpeg"
-import img7 from "../images/Kerala.jpeg"
-import img14 from "../images/pink-sunset-on-rocky-beach-aeaoh1xk9o1uoczw.jpg"
-import img8 from "../images/1.png"
-import img9 from "../images/2.png"
-import img10 from "../images/3.png"
-import img11 from "../images/4.png"
-import img12 from "../images/5.png"
-import img13 from "../images/7.png"
-
-
-
-import Image from "next/image";
-import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
-import { IoIosTime } from "react-icons/io";
-import { MdDateRange } from "react-icons/md";
-import toast, { Toaster } from "react-hot-toast";
-import { UseDispatch, useDispatch, useSelector } from "react-redux";
-import { useRouter } from 'next/navigation';
-import { useEffect } from "react";
-import { setToken, setUser } from "@/redux/features/auth";
-import Loader from "../components/Ldr"
-import { setLoader } from "@/redux/features/loader";
-import Cookies from "js-cookie";
-import Footer from "@/components/Footer";
-
-
-
-
-export default function Home() {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const { loader } = useSelector((state) => state.loader);
-  const { user } = useSelector((state) => state.auth);
-
-
-  //destructuring token 
-  const { token } = useSelector((state) => state.auth);
-
-
-
-
-
-
-
-
-  //Function to get user data though token stored in cookie
-  async function getUserData() {
-    dispatch(setLoader(true));
-    const res = await fetch('https://dummyjson.com/auth/me', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-
-    const data = await res.json();
-    console.log(data);
-
-    if(!data.id) {
-      dispatch(setToken(null));
-      dispatch(setUser(null));
-      Cookies.remove("token");
-      dispatch(setLoader(false));
-      router.push('/login')
-      toast.error('token expired');
-      return;
-
-
-    }
-    
-    dispatch(setLoader(false));
-    
-
-    dispatch(setUser(data));
-
-    
-
-
-    extendSession();
-
-
-  }
-
-  // function to extend session of a user
-  async function extendSession() {
-    const res = await fetch('https://dummyjson.com/auth/refresh', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        expiresInMins: 40,
-      })
-    });
-
-
-
-    const data = await res.json();
-    console.log(data);
-
-    Cookies.set('token', data.token, { expires: 40 });
-    dispatch(setToken(data.token));
-    dispatch(setUser(data));
-
-  }
-
-
-
-  useEffect(() => {
-    getUserData();
-  }, [])
-
-  if (!user) {
-    return <Loader></Loader>
-  }
-
-
-
-
-
-
-
-
-  return (
+return (
 
 
     <div className="bg-white">
@@ -140,6 +7,8 @@ export default function Home() {
       <NavBar></NavBar>
 
       <div>
+        <div className="relative h-full">
+
           <Image className="h-[70vh] object-cover sm:h-[100%] filter blur-sm" src={heroImg} alt="img1"></Image>
           <div className="absolute top-[10%] w-[60%] sm:w-[50%] left-16 flex flex-col gap-10 ">
             <p className="text-[#FFA500] text-6xl sm:text-8xl font-bold">Book your trip to <span className="text-[#afde1e]"> Tawang</span></p>
@@ -157,10 +26,6 @@ export default function Home() {
 
 
             </div>
-
-
-          </div>
-
 
 
           </div>
@@ -190,20 +55,20 @@ export default function Home() {
 
               <p>
 
-              Effortlessly turned my travel dreams into reality with seamless planning and unforgettable experiences
+                Effortlessly turned my travel dreams into reality with seamless planning and unforgettable experiences
 
               </p>
             </div>
 
             <div className="rounded-[10px] border border-white/20 bg-white/10 p-5">
               <p>
-                Sachin 
+                Sachin
 
               </p>
 
               <p>
 
-              Transformed my vacation into a hassle-free adventure filled with unforgettable memories
+                Transformed my vacation into a hassle-free adventure filled with unforgettable memories
 
               </p>
             </div>
@@ -532,18 +397,18 @@ export default function Home() {
         </section>
 
         <section className="w-[95%] mx-auto relative pb-10">
-          <Image className="h-[325px] sm:h-[275px] object-cover"  src={img14}></Image>
+          <Image className="h-[325px] sm:h-[275px] object-cover" src={img14}></Image>
           <div className="absolute top-0 h-[275px] w-[100%] bg-gradient-to-t from-black/90 to-black/0 rounded-lg flex flex-col pt-10 pl-5 gap-2">
             <p className="font-bold text-xl">Newsletter</p>
             <p className="font-bold text-4xl">
-                Sign Up Now
+              Sign Up Now
             </p>
             <p className=" text-xl mt-5">
-                Be the first one to know all about the Exciting Offers, Travel Updates and more.
-          
+              Be the first one to know all about the Exciting Offers, Travel Updates and more.
+
             </p>
 
-            
+
 
 
             <div className="flex flex-col relative">

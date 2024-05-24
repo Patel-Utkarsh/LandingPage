@@ -144,7 +144,7 @@ export default function Home() {
 
           <Image className="h-[70vh] object-cover sm:h-[100%] filter blur-sm" src={heroImg} alt="img1"></Image>
           <div className="absolute top-[10%] w-[60%] sm:w-[50%] left-16 flex flex-col gap-10 ">
-            <p className="text-[#FFA500] text-6xl sm:text-8xl font-bold">Book your trip to <span className="text-[#afde1e]"> Tawang</span></p>
+            <p className="text-white text-6xl sm:text-8xl font-bold">Book your trip to <span className="text-[#afde1e]"> Tawang</span></p>
 
             <div className="font-semibold text-xl">
               <p> <span className="text-[#afde1e]">Wandr</span> | Travel | <span className="text-[#afde1e]">Connect</span> | Repeat </p>

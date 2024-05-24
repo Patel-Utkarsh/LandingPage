@@ -3,7 +3,7 @@ import NavBar from "@/components/NavBar";
 import heroImg from "../images/banner.2d2823a2.jpeg";
 import img1 from "../images/JustWravel-1706862602-AG-Vof-3.jpeg";
 import img2 from "../images/JustWravel-1706862890-bhrigu-3.jpeg"
-import img3 from "../images/Assam_0.jpg.jpeg"
+import img3 from "../images/Assam_0.jpg"
 import img4 from "../images/JustWravel-1707036478-Kashmir-BP-5.jpeg"
 import img5 from "../images/JustWravel-1707153686-L2L-Turtuk-5.jpeg"
 import img6 from "../images/JustWravel-1707153752-L2L-Turtuk-&-TSO-Moriri-4.jpeg"

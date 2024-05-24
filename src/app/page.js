@@ -150,7 +150,7 @@ export default function Home() {
               <p> <span className="text-[#afde1e]">Wandr</span> | Travel | <span className="text-[#afde1e]">Connect</span> | Repeat </p>
               <p>Where Adventure meets Community</p>
               <p>#wravelerforlife</p>
-              <div className="relative mt-5 w-[300px] sm:w-[100%]">
+              <div className="hidden relative mt-5 w-[300px] sm:w-[100%]">
 
                 <input type="text" className="rounded-3xl w-[300px] sm:h-14 h-12  sm:w-[65%] text-black" ></input>
                 <button className="bg-[#1666d9] p-2 sm:w-[25%] rounded-3xl absolute right-0 top-[1%] sm:top-1 sm:left-[39.7%] mt-[1px] ">Explore trip</button>

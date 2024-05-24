@@ -86,7 +86,7 @@ export default function Home() {
     
 
 
-   await extendSession();
+    extendSession();
 
 
   }
@@ -144,7 +144,7 @@ export default function Home() {
 
           <Image className="h-[70vh] object-cover sm:h-[100%] filter blur-sm" src={heroImg} alt="img1"></Image>
           <div className="absolute top-[10%] w-[60%] sm:w-[50%] left-16 flex flex-col gap-10 ">
-            <p className="text-[#FFA500] text-6xl sm:text-8xl font-bold">Book your trip to <span className="text-[#afde1e]"> Tawang</span></p>
+            <p className="text-white text-6xl sm:text-8xl font-bold">Book your trip to <span className="text-[#afde1e]"> Tawang</span></p>
 
             <div className="font-semibold text-xl">
               <p> <span className="text-[#afde1e]">Wander</span> | Travel | <span className="text-[#afde1e]">Connect</span> | Repeat </p>
@@ -153,7 +153,7 @@ export default function Home() {
               <div className="relative mt-5">
 
                 <input type="text" className="rounded-3xl w-[300px] sm:h-14 h-12  sm:w-[65%] text-black" ></input>
-                <button className="bg-[#1666d9] p-2 sm:w-[25%] rounded-3xl absolute right-[-20%] top-[1%] sm:top-1 sm:left-[39.7%] mt-[1px] ">Explore trip</button>
+                <button className="bg-[#1666d9] p-2 sm:w-[25%] rounded-3xl absolute right-[-2.5rem] top-[1%] sm:top-1 sm:left-[39.7%] mt-[1px] ">Explore trip</button>
 
               </div>
 

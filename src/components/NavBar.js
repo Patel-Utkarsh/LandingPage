@@ -44,7 +44,7 @@ function logOut() {
 
       <div className="text-black">
         <div className="flex gap-3">
-          <MdWifiCalling3 className="mt-2" size={25}></MdWifiCalling3>
+          <MdWifiCalling3 className="mt-2" size={30}></MdWifiCalling3>
 
           <div className="hidden sm:flex flex-col gap text-sm">
             <p>Call us</p>
@@ -55,7 +55,7 @@ function logOut() {
           <button className=" hidden sm:flex rounded-md sm:ml-2 bg-blue-600 text-white font-bold p-2" onClick={()=>logOut()}>Logout</button>
 
 
-          <button className="text-black sm:hidden mt-2" onClick={()=>logOut()}><RiLogoutCircleRFill size={25} /></button>
+          <button className="text-black sm:hidden mt-2" onClick={()=>logOut()}><RiLogoutCircleRFill size={30} /></button>
 
         </div>
 

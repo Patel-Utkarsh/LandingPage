@@ -106,6 +106,7 @@ export default function Home() {
 
 
     const data = await res.json();
+    console.log(data);
 
     Cookies.set('token', data.token, { expires: 40 });
     dispatch(setToken(data.token));
@@ -143,7 +144,7 @@ export default function Home() {
 
           <Image className="h-[70vh] object-cover sm:h-[100%] filter blur-sm" src={heroImg} alt="img1"></Image>
           <div className="absolute top-[10%] w-[60%] sm:w-[50%] left-16 flex flex-col gap-10 ">
-            <p className="text-white text-6xl sm:text-8xl font-bold">Book your trip to <span className="text-[#afde1e]"> Tawang</span></p>
+            <p className="text-[#FFA500] text-6xl sm:text-8xl font-bold">Book your trip to <span className="text-[#afde1e]"> Tawang</span></p>
 
             <div className="font-semibold text-xl">
               <p> <span className="text-[#afde1e]">Wander</span> | Travel | <span className="text-[#afde1e]">Connect</span> | Repeat </p>
@@ -151,8 +152,8 @@ export default function Home() {
               <p>#wravelerforlife</p>
               <div className="relative mt-5">
 
-                <input type="text" className="rounded-3xl w-full h-14 sm:w-[55%]" ></input>
-                <button className="bg-[#1666d9] p-3 sm:w-[25%] rounded-3xl absolute right-1 sm:left-[29.7%] mt-[1px]">Explore trip</button>
+                <input type="text" className="rounded-3xl w-[300px] sm:h-14 h-12  sm:w-[65%] text-black" ></input>
+                <button className="bg-[#1666d9] p-2 sm:w-[25%] rounded-3xl absolute right-[-20%] top-[1%] sm:top-1 sm:left-[39.7%] mt-[1px] ">Explore trip</button>
 
               </div>
 
@@ -181,26 +182,26 @@ export default function Home() {
 
             <div className="rounded-[10px] border border-white/20 bg-white/10 p-5">
               <p>
-                Ashish
+                Ritika
 
               </p>
 
               <p>
 
-                Transforming travel dreams into reality, one click at a time - thank you for making trip planning a joy!
+              Effortlessly turned my travel dreams into reality with seamless planning and unforgettable experiences
 
               </p>
             </div>
 
             <div className="rounded-[10px] border border-white/20 bg-white/10 p-5">
               <p>
-                Ashish
+                Sachin 
 
               </p>
 
               <p>
 
-                Transforming travel dreams into reality, one click at a time - thank you for making trip planning a joy!
+              Transformed my vacation into a hassle-free adventure filled with unforgettable memories
 
               </p>
             </div>
@@ -245,10 +246,10 @@ export default function Home() {
 
                   <div>
 
-                    <p className="font-bold">Kashmir Great lakes</p>
+                    <p className="font-bold">Valley of Flowers</p>
                     <div className="flex">
                       <FaLocationDot className="mt-[4px]"></FaLocationDot>
-                      <p>Rishikesh to kashmir</p>
+                      <p>Dehradun to Dehradun</p>
 
                     </div>
 
@@ -294,7 +295,7 @@ export default function Home() {
 
                   <div>
 
-                    <p className="font-bold">Kashmir Great lakes</p>
+                    <p className="font-bold">Bhrigu Lake</p>
                     <div className="flex">
                       <FaLocationDot className="mt-[4px]"></FaLocationDot>
                       <p>Rishikesh to kashmir</p>
@@ -323,7 +324,7 @@ export default function Home() {
 
                   </div>
 
-                  <p>₹32,000</p>
+                  <p>₹36,000</p>
 
 
                 </div>
@@ -343,10 +344,10 @@ export default function Home() {
 
                   <div>
 
-                    <p className="font-bold">Kashmir Great lakes</p>
+                    <p className="font-bold">Friendship Peak</p>
                     <div className="flex">
                       <FaLocationDot className="mt-[4px]"></FaLocationDot>
-                      <p>Rishikesh to kashmir</p>
+                      <p>Rishikesh to Haridwar</p>
 
                     </div>
 
@@ -444,9 +445,9 @@ export default function Home() {
 
         </div>
 
-        <section className="w-[375px]  sm:w-[95%] mx-auto pb-[50px] mt-10 ">
+        <section className="w-[375px] sm:w-[95%] mx-auto pb-[50px] mt-10 ">
 
-          <video className="rounded-xl" src="https://res.cloudinary.com/dhfas7qft/video/upload/v1716392528/sos-desktop_wtpsuv.mp4" autoPlay muted></video>
+          <video className="rounded-xl  " src="https://res.cloudinary.com/dhfas7qft/video/upload/v1716392528/sos-desktop_wtpsuv.mp4" autoPlay muted></video>
 
         </section>
 
@@ -471,10 +472,10 @@ export default function Home() {
             <div className="mt-5 relative" >
               <Image className="w-[85%] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img5} alt="img5"></Image>
               <div className="flex flex-col absolute bottom-4 bg-white p-4  pr-6 left-[17%] sm:left-2 rounded-lg">
-                <p className="font-bold text-center">Bali</p>
+                <p className="font-bold text-center">Kashmir</p>
                 <div className=" flex">
                   <p>Package Starting - </p>
-                  <p className="font-bold"> ₹ 25000</p>
+                  <p className="font-bold"> ₹ 28000</p>
                 </div>
               </div>
             </div>
@@ -482,10 +483,10 @@ export default function Home() {
             <div className="mt-5 relative" >
               <Image className="w-[85%] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img6} alt="img5"></Image>
               <div className="flex flex-col absolute bottom-4 bg-white p-4  pr-6 left-[17%] sm:left-2 rounded-lg">
-                <p className="font-bold text-center">Bali</p>
+                <p className="font-bold text-center">Ladakh</p>
                 <div className=" flex">
                   <p>Package Starting - </p>
-                  <p className="font-bold "> ₹ 25000</p>
+                  <p className="font-bold "> ₹ 20000</p>
                 </div>
               </div>
             </div>
@@ -493,10 +494,10 @@ export default function Home() {
             <div className="mt-5 relative text-black" >
               <Image className="w-[330px] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img7} alt="img5" ></Image>
               <div className="flex flex-col absolute bottom-4 bg-white p-4  pr-6 sm:left-2  left-[15%] rounded-lg">
-                <p className="font-bold text-center">Bali</p>
+                <p className="font-bold text-center">Hampta Pass</p>
                 <div className=" flex">
                   <p>Package Starting - </p>
-                  <p className="font-bold"> ₹ 25000</p>
+                  <p className="font-bold"> ₹ 30000</p>
                 </div>
               </div>
             </div>
@@ -514,10 +515,10 @@ export default function Home() {
 
             <div className=" sm:flex pb-10  ">
               <div className="flex flex-wrap w-[90%] justify-center mx-auto sm:w-[50%] mt-8 sm:justify-evenly">
-                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem]  " src={img9} alt="img5"></Image>
+                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] w-[40%]  " src={img9} alt="img5"></Image>
                 <Image className=" rounded-lg shadow-lg lg:rounded-[1rem]" src={img10} alt="img5"></Image>
                 <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] mt-5" src={img11} alt="img5"></Image>
-                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] mt-5" src={img12} alt="img5"></Image>
+                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] w-[40%] mt-5" src={img12} alt="img5"></Image>
                 <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] mt-5" src={img13} alt="img5"></Image>
               </div>
               <div className="w-[90%] mx-auto sm:w-[50%] mt-14">

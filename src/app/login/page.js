@@ -85,7 +85,7 @@ export default function Login() {
     }
 
     function submitHandler() {
-        if(userData.email === "" || userData.password === "") {
+        if(userData.username === "" || userData.password === "") {
             toast.error('Please fill all the fields');
             return
         }

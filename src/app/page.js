@@ -1,4 +1,137 @@
-return (
+"use client"
+import NavBar from "@/components/NavBar";
+import heroImg from "../images/banner.2d2823a2.jpeg";
+import img1 from "../images/JustWravel-1706862602-AG-Vof-3.jpeg";
+import img2 from "../images/JustWravel-1706862890-bhrigu-3.jpeg"
+import img3 from "../images/JustWravel-1706863447-Friendship-peak-3.jpeg"
+import img4 from "../images/JustWravel-1707036478-Kashmir-BP-5.jpeg"
+import img5 from "../images/JustWravel-1707153686-L2L-Turtuk-5.jpeg"
+import img6 from "../images/JustWravel-1707153752-L2L-Turtuk-&-TSO-Moriri-4.jpeg"
+import img7 from "../images/JustWravel-1706863610-hampta-pass-3.jpeg"
+import img14 from "../images/pink-sunset-on-rocky-beach-aeaoh1xk9o1uoczw.jpg"
+import img8 from "../images/1.png"
+import img9 from "../images/2.png"
+import img10 from "../images/3.png"
+import img11 from "../images/4.png"
+import img12 from "../images/5.png"
+import img13 from "../images/7.png"
+
+
+
+import Image from "next/image";
+import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { IoIosTime } from "react-icons/io";
+import { MdDateRange } from "react-icons/md";
+import toast, { Toaster } from "react-hot-toast";
+import { UseDispatch, useDispatch, useSelector } from "react-redux";
+import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
+import { setToken, setUser } from "@/redux/features/auth";
+import Loader from "../components/Ldr"
+import { setLoader } from "@/redux/features/loader";
+import Cookies from "js-cookie";
+import Footer from "@/components/Footer";
+
+
+
+
+export default function Home() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { loader } = useSelector((state) => state.loader);
+  const { user } = useSelector((state) => state.auth);
+
+
+  //destructuring token 
+  const { token } = useSelector((state) => state.auth);
+
+
+
+
+
+
+
+
+  //Function to get user data though token stored in cookie
+  async function getUserData() {
+    dispatch(setLoader(true));
+    const res = await fetch('https://dummyjson.com/auth/me', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (!data.id) {
+      dispatch(setToken(null));
+      dispatch(setUser(null));
+      Cookies.remove("token");
+      dispatch(setLoader(false));
+      router.push('/login')
+      toast.error('token expired');
+      return;
+
+
+    }
+
+    dispatch(setLoader(false));
+
+
+    dispatch(setUser(data));
+
+
+
+
+    await extendSession();
+
+
+  }
+
+  // function to extend session of a user
+  async function extendSession() {
+    const res = await fetch('https://dummyjson.com/auth/refresh', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        expiresInMins: 40,
+      })
+    });
+
+
+
+    const data = await res.json();
+    console.log(data);
+
+    Cookies.set('token', data.token, { expires: 40 });
+    dispatch(setToken(data.token));
+    dispatch(setUser(data));
+
+  }
+
+
+
+  useEffect(() => {
+    getUserData();
+  }, [])
+
+  if (!user) {
+    return <Loader></Loader>
+  }
+
+
+
+
+
+
+
+
+  return (
 
 
     <div className="bg-white">

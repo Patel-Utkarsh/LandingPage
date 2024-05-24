@@ -8,13 +8,14 @@ import img4 from "../images/JustWravel-1707036478-Kashmir-BP-5.jpeg"
 import img5 from "../images/JustWravel-1707153686-L2L-Turtuk-5.jpeg"
 import img6 from "../images/JustWravel-1707153752-L2L-Turtuk-&-TSO-Moriri-4.jpeg"
 import img7 from "../images/JustWravel-1706863610-hampta-pass-3.jpeg"
+import img14 from "../images/pink-sunset-on-rocky-beach-aeaoh1xk9o1uoczw.jpg"
 import img8 from "../images/1.png"
 import img9 from "../images/2.png"
 import img10 from "../images/3.png"
 import img11 from "../images/4.png"
 import img12 from "../images/5.png"
 import img13 from "../images/7.png"
-import img14 from "../images/vietnam.jpeg"
+
 
 
 import Image from "next/image";
@@ -22,14 +23,16 @@ import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoIosTime } from "react-icons/io";
 import { MdDateRange } from "react-icons/md";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { UseDispatch, useDispatch, useSelector } from "react-redux";
 import { useRouter } from 'next/navigation';
 import { useEffect } from "react";
-import { setUser } from "@/redux/features/auth";
+import { setToken, setUser } from "@/redux/features/auth";
 import Loader from "../components/Ldr"
 import { setLoader } from "@/redux/features/loader";
-import cookie from "js-cookie"
+import Cookies from "js-cookie";
+import Footer from "@/components/Footer";
+
 
 
 
@@ -53,7 +56,6 @@ export default function Home() {
   //Function to get user data though token stored in cookie
   async function getUserData() {
     dispatch(setLoader(true));
-    console.log(typeof token);
     const res = await fetch('https://dummyjson.com/auth/me', {
       method: 'GET',
       headers: {
@@ -62,11 +64,26 @@ export default function Home() {
     });
 
     const data = await res.json();
+    console.log(data);
+
+    if(!data.id) {
+      dispatch(setToken(null));
+      dispatch(setUser(null));
+      Cookies.remove("token");
+      dispatch(setLoader(false));
+      router.push('/login')
+      toast.error('token expired');
+      return;
+
+
+    }
     
     dispatch(setLoader(false));
     
 
     dispatch(setUser(data));
+
+    
 
 
    await extendSession();
@@ -82,7 +99,7 @@ export default function Home() {
         'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
-        expiresInMins: 30,
+        expiresInMins: 40,
       })
     });
 
@@ -90,7 +107,9 @@ export default function Home() {
 
     const data = await res.json();
 
-    cookie.set('token', data.token, { expires: 60 });
+    Cookies.set('token', data.token, { expires: 40 });
+    dispatch(setToken(data.token));
+    dispatch(setUser(data));
 
   }
 
@@ -439,7 +458,7 @@ export default function Home() {
 
           <div className="flex flex-wrap gap-1 justify-around">
             <div className="mt-5 relative" >
-              <Image className="w-[85%] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img4}></Image>
+              <Image className="w-[85%] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img4} alt="img5"></Image>
               <div className="flex flex-col absolute bottom-4 bg-white p-4  pr-6 left-[17%] sm:left-2  rounded-lg">
                 <p className="font-bold text-center">Bali</p>
                 <div className=" flex">
@@ -450,7 +469,7 @@ export default function Home() {
             </div>
 
             <div className="mt-5 relative" >
-              <Image className="w-[85%] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img5}></Image>
+              <Image className="w-[85%] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img5} alt="img5"></Image>
               <div className="flex flex-col absolute bottom-4 bg-white p-4  pr-6 left-[17%] sm:left-2 rounded-lg">
                 <p className="font-bold text-center">Bali</p>
                 <div className=" flex">
@@ -461,7 +480,7 @@ export default function Home() {
             </div>
 
             <div className="mt-5 relative" >
-              <Image className="w-[85%] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img6}></Image>
+              <Image className="w-[85%] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img6} alt="img5"></Image>
               <div className="flex flex-col absolute bottom-4 bg-white p-4  pr-6 left-[17%] sm:left-2 rounded-lg">
                 <p className="font-bold text-center">Bali</p>
                 <div className=" flex">
@@ -472,7 +491,7 @@ export default function Home() {
             </div>
 
             <div className="mt-5 relative text-black" >
-              <Image className="w-[330px] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img14} ></Image>
+              <Image className="w-[330px] mx-auto sm:w-[260px] h-[300px] object-cover rounded-xl" src={img7} alt="img5" ></Image>
               <div className="flex flex-col absolute bottom-4 bg-white p-4  pr-6 sm:left-2  left-[15%] rounded-lg">
                 <p className="font-bold text-center">Bali</p>
                 <div className=" flex">
@@ -493,19 +512,41 @@ export default function Home() {
 
             </div>
 
-            <div className=" flex flex-col sm:flex">
+            <div className=" sm:flex pb-10  ">
               <div className="flex flex-wrap w-[90%] justify-center mx-auto sm:w-[50%] mt-8 sm:justify-evenly">
-                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] " src={img9}></Image>
-                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem]" src={img10}></Image>
-                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] mt-5" src={img11}></Image>
-                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] mt-5" src={img12}></Image>
-                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] mt-5" src={img13}></Image>
+                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem]  " src={img9} alt="img5"></Image>
+                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem]" src={img10} alt="img5"></Image>
+                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] mt-5" src={img11} alt="img5"></Image>
+                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] mt-5" src={img12} alt="img5"></Image>
+                <Image className=" rounded-lg shadow-lg lg:rounded-[1rem] mt-5" src={img13} alt="img5"></Image>
               </div>
-              <div className="w-[90%] mx-auto sm:w-[50%] mt-10">
+              <div className="w-[90%] mx-auto sm:w-[50%] mt-14">
                 In a brief period, JustWravel has achieved significant recognition and success. With each new milestone, Justwravel adds a unique feather to its cap. As a registered member of ATOAI, we are certified tour operators. Our journey has been characterized by excellence and trust, as demonstrated by our three-time consecutive receipt of the MSME Best Enterprise (Travel & Tourism) award. This achievement reflects our unwavering commitment to delivering top-tier travel experiences. Additionally, we proudly hold the 2023 TripAdvisor Travelers Choice Award, a testament to the consistently outstanding feedback and reviews from our satisfied travelers. JustWravel is supported by Startup India, underscoring our dedication to innovation and quality in the travel industry. We were honored to be part of Uttar Pradesh Tourism as an adventure tour operator. Furthermore, JustWravel is incubated by IIM Bangalore's NSRCEL, demonstrating our strong foundation and support from esteemed educational institutions. We were featured by ANI, South Asia's leading multimedia news agency, and Business Standard. These recognitions inspire us to continually raise the bar and continue providing exceptional journeys for our valued travelers.
               </div>
             </div>
 
+          </div>
+        </section>
+
+        <section className="w-[95%] mx-auto relative pb-10">
+          <Image className="h-[325px] sm:h-[275px] object-cover"  src={img14}></Image>
+          <div className="absolute top-0 h-[275px] w-[100%] bg-gradient-to-t from-black/90 to-black/0 rounded-lg flex flex-col pt-10 pl-5 gap-2">
+            <p className="font-bold text-xl">Newsletter</p>
+            <p className="font-bold text-4xl">
+                Sign Up Now
+            </p>
+            <p className=" text-xl mt-5">
+                Be the first one to know all about the Exciting Offers, Travel Updates and more.
+          
+            </p>
+
+            
+
+
+            <div className="flex flex-col relative">
+              <input type="text" className="text-black w-[80%] sm:w-[40%] mt-5 p-2 rounded-2xl" placeholder="Enter Your Email"></input>
+              <button className="absolute left-[60%] sm:left-[32%] top-5 bg-[#1666d9] p-2 font-semibold rounded-2xl">Subscribe</button>
+            </div>
           </div>
         </section>
 
@@ -515,6 +556,8 @@ export default function Home() {
 
 
       </div>
+
+      <Footer></Footer>
 
 
     </div>

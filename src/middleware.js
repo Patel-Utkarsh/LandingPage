@@ -6,16 +6,15 @@ export function middleware(request) {
     const tokenInfo = request.cookies.get("token")?.value;
     const token = tokenInfo ? tokenInfo : null;
 
-    const requestURL = new URL(request.url, `http://localhost:3000/`);
+    const requestURL = new URL(request.url, `https://assignment121.vercel.app/`);
 
     if (!token && requestURL.pathname !== '/login') {
-        // Redirect to the login page if there's no token and the user is not already on the login page
-        return NextResponse.redirect(new URL('/login', `http://localhost:3000/`).toString());
+        
+        return NextResponse.redirect(new URL('/login', `https://assignment121.vercel.app/`).toString());
     } else if (token && requestURL.pathname === '/login') {
-        // Redirect to the homepage if the user is already logged in and tries to access the login page
-        return NextResponse.redirect(new URL('/', `http://localhost:3000/`).toString());
+        
+        return NextResponse.redirect(new URL('/', `https://assignment121.vercel.app/`).toString());
     } else {
-        // Allow the request to proceed without redirection
         return NextResponse.next();
     }
  

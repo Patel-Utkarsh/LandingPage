@@ -19,18 +19,9 @@ export default function Login() {
     const {loader} = useSelector((state)=>state.loader);
    
  
-    const {token} = useSelector((state)=>state.auth);
-    //console.log(token);
-    if(token) {
-       
-        router.push('/');
-    
-    
-    }
-
   
  
-    dispatch(setLoader(false));
+
 
     const [userData,setUserData] = useState({
         username : "",
@@ -53,22 +44,24 @@ export default function Login() {
           })
         });
         const data = await res.json();
-        //console.log(data);
-        dispatch(setLoader(false));
+      
 
         if(data.token) {
-            toast.success('login successfull');
+            
             
             
             dispatch(setToken(data.token));
             dispatch(setUser(data));
             Cookies.set('token', data.token, { expires: 30 });
            
-            console.log('hiii');
+        
+            toast.success('login successfull');
             router.push('/');
+            dispatch(setLoader(false));
             return;
 
         }
+        dispatch(setLoader(false));
 
         toast.error('Invalid credentials')
 
